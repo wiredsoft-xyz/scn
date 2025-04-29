@@ -6,7 +6,7 @@
 ---@field private _next table|nil
 ---@field private _transition table|nil
 local Scn = {
-    _VERSION     = 'scn 0.1.0',
+    _VERSION     = 'scn 0.1.1',
     _DESCRIPTION = 'scn is a minimal abstraction built on top of love2d to manage scenes and transitions.',
     _URL         = 'https://github.com/wiredsoft-xyz/scn',
     _LICENSE     = [[
@@ -54,7 +54,10 @@ end
 Scn.register = function(scene)
     Scn._validate(scene) -- trigger validations
     Scn.scenes[scene.name] = scene
-    if Scn.current == nil then Scn.current = scene end -- set as default scene if none set yet
+    if Scn.current == nil then
+        Scn.current = scene -- set as default scene if none set yet
+        Scn.current:enter()
+    end
 end
 
 Scn.switch = function (name, transition)

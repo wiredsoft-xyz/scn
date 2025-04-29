@@ -1,5 +1,6 @@
 local Scn = require("scn")
 local FadeInTransition = require("example_game.transitions.fadein")
+local FadeOutTransition = require("example_game.transitions.fadeout")
 
 local GameplayScene = { name = "Gameplay" }
 GameplayScene.__index = GameplayScene
@@ -14,6 +15,9 @@ GameplayScene.draw = function(self)
 end
 
 GameplayScene.update = function(self, dt)
+    if love.keyboard.isDown('space') then
+        Scn.switch("MainMenu", FadeOutTransition.new())
+    end
 end
 
 GameplayScene.exit = function(self)
